@@ -4,7 +4,7 @@
     repo: 'ppa:chromium-team/beta'
     codename: 'bionic'
     state: present
-    update_cache: yes
+    update_cache: true
 
 - name: Copy PPA file
   copy:

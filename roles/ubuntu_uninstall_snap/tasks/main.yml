@@ -14,7 +14,7 @@
   apt:
     name: snapd
     state: absent
-    purge: yes
+    purge: true
 
 - name: Block Snap from being reinstalled
   copy:

@@ -4,7 +4,7 @@
     repo: 'ppa:phoerious/keepassxc'
     codename: '{{ ansible_distribution_release }}'
     state: present
-    update_cache: yes
+    update_cache: true
 
 - name: Install keepassxc app
   package:

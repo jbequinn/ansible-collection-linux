@@ -9,4 +9,4 @@
     repo: deb https://download.sublimetext.com/ apt/stable/
     state: present
     filename: sublime-text
-    update_cache: yes
+    update_cache: true

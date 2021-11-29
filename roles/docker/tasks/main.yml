@@ -13,7 +13,7 @@
 - name: Enable and start Docker service
   service:
     name: docker
-    enabled: yes
+    enabled: true
     state: started
 
 - name: Ensure group 'docker' exists
@@ -25,4 +25,4 @@
   user:
     name: '{{ ansible_user }}'
     groups: docker
-    append: yes
+    append: true
