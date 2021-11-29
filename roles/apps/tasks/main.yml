@@ -1,0 +1,12 @@
+---
+- name: Install packages
+  package:
+    name: "{{ install_packages }}"
+    state: present
+
+- name: Uninstall packages
+  package:
+    name: "{{ uninstall_packages }}"
+    state: absent
+
+- include_tasks: "tasks-{{ ansible_os_family }}.yml"

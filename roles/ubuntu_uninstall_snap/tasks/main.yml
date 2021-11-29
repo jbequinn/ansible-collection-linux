@@ -1,0 +1,30 @@
+---
+- name: Checking if snap is installed
+  stat:
+    path: /usr/bin/snap
+  register: snap_installed
+
+- name: Unmount the snap mount points
+  mount:
+    path: /var/snap
+    state: unmounted
+  when: snap_installed.stat.exists
+
+- name: Uninstall snapd package
+  apt:
+    name: snapd
+    state: absent
+    purge: yes
+
+- name: Block Snap from being reinstalled
+  copy:
+    src: nosnap.pref
+    dest: '/etc/apt/preferences.d/nosnap.pref'
+    owner: 'root'
+    group: 'root'
+    mode: '0644'
+
+- name: Install Gnome-software
+  package:
+    name: "gnome-software"
+    state: present

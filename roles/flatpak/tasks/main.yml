@@ -1,0 +1,17 @@
+---
+- name: Install the Flatpak package
+  package:
+    name: flatpak
+    state: present
+
+- name: Add the Flathub Flatpak repository remote to the system installation
+  flatpak_remote:
+    name: flathub
+    state: present
+    flatpakrepo_url: https://flathub.org/repo/flathub.flatpakrepo
+
+- name: Install Flatpak applications
+  flatpak:
+    name: '{{ item }}'
+    state: present
+  loop: '{{ flatpak_apps }}'

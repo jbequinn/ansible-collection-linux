@@ -1,0 +1,28 @@
+---
+- name: Import platform specific Docker tasks
+  include_tasks: "tasks-{{ ansible_os_family }}.yml"
+
+- name: Install Docker packages
+  package:
+    name:
+      - docker-ce
+      - docker-ce-cli
+      - containerd.io
+    state: present
+
+- name: Enable and start Docker service
+  service:
+    name: docker
+    enabled: yes
+    state: started
+
+- name: Ensure group 'docker' exists
+  group:
+    name: docker
+    state: present
+
+- name: Add the current user to group 'docker'
+  user:
+    name: '{{ ansible_user }}'
+    groups: docker
+    append: yes

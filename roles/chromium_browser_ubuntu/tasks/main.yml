@@ -1,0 +1,17 @@
+---
+- name: Add Chromium team PPA
+  apt_repository:
+    repo: 'ppa:chromium-team/beta'
+    codename: 'bionic'
+    state: present
+    update_cache: yes
+
+- name: Copy PPA file
+  copy:
+    src: pin-chromium-team-beta
+    dest: /etc/apt/preferences.d/
+
+- name: Install Chromium
+  apt:
+    name: chromium-browser
+    state: present

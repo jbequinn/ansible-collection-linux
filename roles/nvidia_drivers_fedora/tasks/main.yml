@@ -1,0 +1,21 @@
+---
+- name: Enable nvidia non free repository
+  command: dnf config-manager --set-enabled rpmfusion-nonfree-nvidia-driver
+  args:
+    warn: false
+
+- name: Install nvidia packages
+  package:
+    name:
+      - akmod-nvidia
+      - xorg-x11-drv-nvidia-cuda
+      - xorg-x11-drv-nvidia-cuda-libs
+      - xorg-x11-drv-nvidia-power
+      - libva-vdpau-driver
+      - libva-utils
+      - vulkan
+      - vdpauinfo
+    state: present
+
+- name: update Kernel Mode Setting
+  command: grubby --update-kernel=ALL --args='nvidia-drm.modeset=1'

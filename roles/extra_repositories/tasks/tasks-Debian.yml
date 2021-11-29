@@ -1,0 +1,6 @@
+---
+- name: add universe repository
+  shell: add-apt-repository --yes universe
+
+- name: add multiverse repository
+  shell: add-apt-repository --yes multiverse

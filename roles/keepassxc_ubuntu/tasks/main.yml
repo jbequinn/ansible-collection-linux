@@ -1,0 +1,12 @@
+---
+- name: Add keepassxc PPA for '{{ ansible_distribution_release }}'
+  apt_repository:
+    repo: 'ppa:phoerious/keepassxc'
+    codename: '{{ ansible_distribution_release }}'
+    state: present
+    update_cache: yes
+
+- name: Install keepassxc app
+  package:
+    name: keepassxc
+    state: present

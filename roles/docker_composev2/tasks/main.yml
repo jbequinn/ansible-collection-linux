@@ -1,0 +1,21 @@
+---
+- name: Create docker plugins directory if it does not exist
+  file:
+    path: /usr/lib/docker/cli-plugins
+    state: directory
+    mode: '0755'
+    owner: root
+    group: root
+
+- name: 'Download docker compose {{ docker_compose_version }} executable for {{ ansible_architecture }}'
+  get_url:
+    url: 'https://github.com/docker/compose/releases/download/v{{ docker_compose_version }}/docker-compose-linux-{{ ansible_architecture }}'
+    dest: /usr/lib/docker/cli-plugins/docker-compose
+    checksum: 'sha256:https://github.com/docker/compose/releases/download/v{{ docker_compose_version }}/docker-compose-linux-{{ ansible_architecture }}.sha256'
+    mode: '0755'
+    owner: root
+    group: root
+  register: result
+  retries: 3
+  delay: 5
+  until: result is not failed

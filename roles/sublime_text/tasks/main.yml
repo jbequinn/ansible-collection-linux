@@ -1,0 +1,13 @@
+---
+- name: Ensure system is set up to work with https sources
+  package:
+    name: wget, apt-transport-https
+    state: present
+
+- name: Import platform specific sublime-text tasks
+  include_tasks: "sublime-text-{{ ansible_os_family }}.yml"
+
+- name: Install Sublime Text
+  package:
+    name: sublime-text
+    state: present
