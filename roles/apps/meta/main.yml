@@ -1,2 +1,2 @@
 dependencies:
-  - role: os-update
+  - role: os_update
