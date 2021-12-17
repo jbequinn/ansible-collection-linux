@@ -1,5 +1,4 @@
-- include_vars: 'vars-{{ ansible_distribution }}.yml'
-
+---
 - name: Install required packages
   package:
     name: dnf-plugins-core

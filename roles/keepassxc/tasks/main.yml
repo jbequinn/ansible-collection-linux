@@ -5,6 +5,7 @@
     codename: '{{ ansible_distribution_release }}'
     state: present
     update_cache: true
+  when: ansible_distribution == 'Pop!_OS' or ansible_distribution == 'Ubuntu'
 
 - name: Install keepassxc app
   package:
