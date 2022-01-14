@@ -10,6 +10,9 @@
   copy:
     src: pin-chromium-team-beta
     dest: /etc/apt/preferences.d/
+    owner: 'root'
+    group: 'root'
+    mode: '0644'
 
 - name: Install Chromium
   apt:

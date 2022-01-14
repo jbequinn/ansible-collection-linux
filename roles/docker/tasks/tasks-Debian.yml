@@ -1,8 +1,6 @@
 ---
-- name: Register architecture variable
-  ansible.builtin.shell: dpkg --print-architecture
-  register: docker_architecture
-  ignore_errors: true
+- name: Gather variables
+  ansible.builtin.include_vars: 'main.yml'
 
 - name: Install packages to allow apt to use a repository over HTTPS
   package:
@@ -15,8 +13,8 @@
     keyring: /usr/share/keyrings/docker-archive-keyring.gpg
     state: present
 
-- name: 'Set up the stable repository for {{ docker_architecture.stdout }} and {{ ansible_distribution_release }}'
+- name: 'Set up the stable repository for {{ docker_architecture }} and {{ ansible_distribution_release }}'
   apt_repository:
-    repo: 'deb [arch={{ docker_architecture.stdout }} signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/{{ docker_os }} {{ ansible_distribution_release }} stable'
+    repo: 'deb [arch={{ docker_architecture }} signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/{{ docker_os }} {{ ansible_distribution_release }} stable'
     state: present
     update_cache: true

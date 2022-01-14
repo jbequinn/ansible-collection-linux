@@ -1,8 +1,8 @@
 ---
 - name: Upgrade all packages
   dnf:
-    name: "*"
-    state: latest
+    name: '*'
+    state: latest  # noqa package-latest
 
 - name: Autoremove unneeded packages installed as dependencies
   dnf:
