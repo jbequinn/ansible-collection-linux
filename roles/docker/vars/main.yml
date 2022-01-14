@@ -4,3 +4,8 @@ docker_architecture_map:
   aarch64: 'arm64'
 
 docker_architecture: "{{ docker_architecture_map[ansible_architecture] | default(ansible_architecture) }}"
+
+docker_os_map:
+  Pop!_OS: 'ubuntu'
+
+docker_os: "{{ docker_os_map[ansible_distribution] | default(ansible_distribution|lower) }}"

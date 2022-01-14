@@ -1,18 +1,6 @@
 ---
-- name: Set os distribution for Ubuntu systems
-  set_fact:
-    docker_os: ubuntu
-  when: ansible_distribution == 'Pop!_OS' or ansible_distribution == 'Ubuntu'
-
-- name: Set os distribution for Debian systems
-  set_fact:
-    docker_os: debian
-  when: ansible_distribution == 'Debian'
-
-- name: Set os distribution for Fedora systems
-  set_fact:
-    docker_os: fedora
-  when: ansible_distribution == 'Fedora'
+- name: Gather variables
+  ansible.builtin.include_vars: 'main.yml'
 
 - name: Import platform specific Docker tasks
   include_tasks: "tasks-{{ ansible_os_family }}.yml"

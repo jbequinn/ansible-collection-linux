@@ -1,7 +1,4 @@
 ---
-- name: Gather variables
-  ansible.builtin.include_vars: 'main.yml'
-
 - name: Install packages to allow apt to use a repository over HTTPS
   package:
     name: ca-certificates, curl, gnupg, lsb-release
