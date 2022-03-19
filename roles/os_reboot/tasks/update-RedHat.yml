@@ -1,0 +1,8 @@
+---
+- name: Check if a reboot is required
+  ansible.builtin.command: 'needs-restarting  -r'
+  register: reboot_required
+
+- name: Reboot the server (if required)
+  ansible.builtin.reboot:
+  when: reboot_required.rc == 1
