@@ -1,18 +1,21 @@
 ---
-- name: Add Chromium team PPA
-  apt_repository:
-    repo: 'ppa:chromium-team/beta'
-    codename: 'bionic'
+- name: Install packages to allow apt to use a repository over HTTPS
+  package:
+    name: ca-certificates, curl, gnupg
     state: present
-    update_cache: true
 
-- name: Copy PPA file
-  copy:
-    src: pin-chromium-team-beta
-    dest: /etc/apt/preferences.d/
-    owner: 'root'
-    group: 'root'
-    mode: '0644'
+- name: 'Add Chromium Team GPG key for bionic'
+  apt_key:
+    url: 'http://keyserver.ubuntu.com/pks/lookup?op=get&search=0xEA6E302DC78CC4B087CFC3570EBEA9B02842F111'
+    keyring: /usr/share/keyrings/chromium-team-beta-keyring.gpg
+    state: present
+
+- name: 'Set up the Chromium Team repository for bionic'
+  apt_repository:
+    repo: 'deb [signed-by=/usr/share/keyrings/chromium-team-beta-keyring.gpg] https://ppa.launchpadcontent.net/chromium-team/beta/ubuntu bionic main'
+    state: present
+    filename: chromium-beta
+    update_cache: true
 
 - name: Install Chromium
   apt:
