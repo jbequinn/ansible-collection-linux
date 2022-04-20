@@ -2,12 +2,15 @@
 name: Build and publish collection
 on:
   release:
-    types: [published]
+    types:
+      - published
 
 jobs:
-  docker:
+  deploy:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
+
       - name: Build and Deploy Collection
         uses: artis3n/ansible_galaxy_collection@v2
         with:
