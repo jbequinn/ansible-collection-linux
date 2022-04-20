@@ -14,4 +14,5 @@
   apt_repository:
     repo: 'deb [signed-by=/usr/share/keyrings/mozilla-team-keyring.gpg] https://ppa.launchpadcontent.net/ubuntu-mozilla-security/ppa/ubuntu {{ distribution }} main'
     state: present
+    filename: firefox
     update_cache: true
