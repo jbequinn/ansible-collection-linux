@@ -14,4 +14,5 @@
   apt_repository:
     repo: 'deb [arch={{ docker_architecture }} signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/{{ docker_os }} {{ ansible_distribution_release }} stable'
     state: present
+    filename: docker
     update_cache: true
