@@ -1,23 +1,9 @@
 ---
-- name: Install packages to allow apt to use a repository over HTTPS
-  package:
-    name: ca-certificates, curl, gnupg
-    state: present
-
-- name: 'Add Chromium Team GPG key for bionic'
-  apt_key:
-    url: 'http://keyserver.ubuntu.com/pks/lookup?op=get&search=0xEA6E302DC78CC4B087CFC3570EBEA9B02842F111'
-    keyring: /usr/share/keyrings/chromium-team-beta-keyring.gpg
-    state: present
-
-- name: 'Set up the Chromium Team repository for bionic'
-  apt_repository:
-    repo: 'deb [signed-by=/usr/share/keyrings/chromium-team-beta-keyring.gpg] https://ppa.launchpadcontent.net/chromium-team/beta/ubuntu bionic main'
-    state: present
-    filename: chromium-beta
-    update_cache: true
+- name: Import platform specific Firefox tasks
+  include_tasks: "chromium-ubuntu.yml"
+  when: ansible_distribution == 'Pop!_OS' or ansible_distribution == 'Ubuntu'
 
 - name: Install Chromium
-  apt:
+  package:
     name: chromium-browser
     state: present
