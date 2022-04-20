@@ -5,13 +5,16 @@
     state: present
 
 - name: Add the Flathub Flatpak repository remote to the system installation
-  flatpak_remote:
+  community.general.flatpak_remote:
     name: flathub
-    state: present
     flatpakrepo_url: https://flathub.org/repo/flathub.flatpakrepo
+    method: system
+    state: present
 
 - name: Install Flatpak applications
-  flatpak:
+  community.general.flatpak:
     name: '{{ item }}'
     state: present
+    method: system
+    remote: flathub
   loop: '{{ flatpak_apps }}'
