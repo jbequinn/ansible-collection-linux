@@ -1,12 +1,18 @@
 ---
+- name: Install packages to allow apt to use a repository over HTTPS
+  package:
+    name: ca-certificates, curl, gnupg
+    state: present
+
 - name: Install the apt GPG key
   apt_key:
     url: https://download.sublimetext.com/sublimehq-pub.gpg
+    keyring: /usr/share/keyrings/sublime-text-keyring.gpg
     state: present
 
 - name: Add Sublime stable PPA
   apt_repository:
-    repo: deb https://download.sublimetext.com/ apt/stable/
+    repo: deb [signed-by=/usr/share/keyrings/sublime-text-keyring.gpg] https://download.sublimetext.com/ apt/stable/
     state: present
     filename: sublime-text
     update_cache: true
