@@ -1,11 +1,11 @@
 ---
 - name: Enable nvidia non free repository
-  command: dnf config-manager --set-enabled rpmfusion-nonfree-nvidia-driver
+  ansible.builtin.command: dnf config-manager --set-enabled rpmfusion-nonfree-nvidia-driver
   args:
     warn: false
 
 - name: Install nvidia packages
-  package:
+  ansible.builtin.package:
     name:
       - akmod-nvidia
       - xorg-x11-drv-nvidia-cuda
@@ -18,4 +18,4 @@
     state: present
 
 - name: update Kernel Mode Setting
-  command: grubby --update-kernel=ALL --args='nvidia-drm.modeset=1'
+  ansible.builtin.command: grubby --update-kernel=ALL --args='nvidia-drm.modeset=1'

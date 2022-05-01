@@ -1,17 +1,17 @@
 ---
 - name: Install packages to allow apt to use a repository over HTTPS
-  package:
+  ansible.builtin.package:
     name: ca-certificates, curl, gnupg
     state: present
 
 - name: 'Add KeePassXC GPG key'
-  apt_key:
+  ansible.builtin.apt_key:
     url: 'http://keyserver.ubuntu.com/pks/lookup?op=get&search=0xD89C66D0E31FEA2874EBD20561922AB60068FCD6'
     keyring: /usr/share/keyrings/keepassxc-keyring.gpg
     state: present
 
 - name: 'Set up the KeePassXC repository'
-  apt_repository:
+  ansible.builtin.apt_repository:
     repo: 'deb [signed-by=/usr/share/keyrings/keepassxc-keyring.gpg] https://ppa.launchpadcontent.net/phoerious/keepassxc/ubuntu {{ ansible_distribution_release }} main'
     state: present
     filename: keepassxc

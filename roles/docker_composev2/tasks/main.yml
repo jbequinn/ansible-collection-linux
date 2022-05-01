@@ -1,6 +1,6 @@
 ---
 - name: Create docker plugins directory if it does not exist
-  file:
+  ansible.builtin.file:
     path: /usr/lib/docker/cli-plugins
     state: directory
     mode: '0755'
@@ -8,7 +8,7 @@
     group: root
 
 - name: 'Download docker compose {{ docker_compose_version }} executable for {{ ansible_architecture }}'
-  get_url:
+  ansible.builtin.get_url:
     url: 'https://github.com/docker/compose/releases/download/v{{ docker_compose_version }}/docker-compose-linux-{{ ansible_architecture }}'
     dest: /usr/lib/docker/cli-plugins/docker-compose
     checksum: 'sha256:https://github.com/docker/compose/releases/download/v{{ docker_compose_version }}/docker-compose-linux-{{ ansible_architecture }}.sha256'

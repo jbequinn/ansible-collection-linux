@@ -1,17 +1,17 @@
 ---
 - name: Install packages to allow apt to use a repository over HTTPS
-  package:
+  ansible.builtin.package:
     name: ca-certificates, curl, gnupg
     state: present
 
 - name: 'Add Mozilla Team GPG key for {{ distribution }}'
-  apt_key:
+  ansible.builtin.apt_key:
     url: 'http://keyserver.ubuntu.com/pks/lookup?op=get&search=0xAF316E81A155146718A6FBD7A6DCF7707EBC211F'
     keyring: /usr/share/keyrings/mozilla-team-keyring.gpg
     state: present
 
 - name: 'Set up the Mozilla Team repository for {{ distribution }}'
-  apt_repository:
+  ansible.builtin.apt_repository:
     repo: 'deb [signed-by=/usr/share/keyrings/mozilla-team-keyring.gpg] https://ppa.launchpadcontent.net/ubuntu-mozilla-security/ppa/ubuntu {{ distribution }} main'
     state: present
     filename: firefox

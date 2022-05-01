@@ -1,10 +1,10 @@
 ---
 - name: Install the RPM GPG key
-  rpm_key:
+  ansible.builtin.rpm_key:
     key: https://download.sublimetext.com/sublimehq-rpm-pub.gpg
     state: present
 
 - name: Import Sublime RPM Repo
-  get_url:
+  ansible.builtin.get_url:
     url: https://download.sublimetext.com/rpm/stable/x86_64/sublime-text.repo
     dest: /etc/yum.repos.d/sublime-text.repo

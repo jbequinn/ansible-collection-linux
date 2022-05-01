@@ -1,6 +1,6 @@
 ---
 - name: Checking if snap is installed
-  stat:
+  ansible.builtin.stat:
     path: /usr/bin/snap
   register: snap_installed
 
@@ -11,13 +11,13 @@
   when: snap_installed.stat.exists
 
 - name: Uninstall snapd package
-  apt:
+  ansible.builtin.apt:
     name: snapd
     state: absent
     purge: true
 
 - name: Block Snap from being reinstalled
-  copy:
+  ansible.builtin.copy:
     src: nosnap.pref
     dest: '/etc/apt/preferences.d/nosnap.pref'
     owner: 'root'
@@ -25,6 +25,6 @@
     mode: '0644'
 
 - name: Install Gnome-software
-  package:
+  ansible.builtin.package:
     name: "gnome-software"
     state: present

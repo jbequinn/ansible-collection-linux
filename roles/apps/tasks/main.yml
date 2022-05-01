@@ -1,11 +1,11 @@
 ---
 - name: Install packages
-  package:
+  ansible.builtin.package:
     name: "{{ install_packages }}"
     state: present
 
 - name: Uninstall packages
-  package:
+  ansible.builtin.package:
     name: "{{ uninstall_packages }}"
     state: absent
 

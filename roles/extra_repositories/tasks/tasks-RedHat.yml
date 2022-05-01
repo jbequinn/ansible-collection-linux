@@ -1,18 +1,18 @@
 ---
 - name: 'Enable the free RPM Fusion repository for version {{ ansible_distribution_version }}'
-  dnf:
+  ansible.builtin.dnf:
     name: "https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-{{ ansible_distribution_version }}.noarch.rpm"
     state: present
     disable_gpg_check: true
 
 
 - name: 'Enable the non-free RPM Fusion repository for version {{ ansible_distribution_version }}'
-  dnf:
+  ansible.builtin.dnf:
     name: "https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-{{ ansible_distribution_version }}.noarch.rpm"
     state: present
     disable_gpg_check: true
 
 - name: Install fedora-workstation-repositories
-  package:
+  ansible.builtin.package:
     name:
       - fedora-workstation-repositories

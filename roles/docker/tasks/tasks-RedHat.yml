@@ -1,10 +1,10 @@
 ---
 - name: Install required packages
-  package:
+  ansible.builtin.package:
     name: dnf-plugins-core
     state: present
 
 - name: 'Import {{ docker_os }} RPM Repo'
-  get_url:
+  ansible.builtin.get_url:
     url: 'https://download.docker.com/linux/{{ docker_os }}/docker-ce.repo'
     dest: /etc/yum.repos.d/docker-ce.repo

@@ -1,9 +1,9 @@
 ---
 - name: Upgrade all packages
-  dnf:
+  ansible.builtin.dnf:
     name: '*'
     state: latest  # noqa package-latest
 
 - name: Autoremove unneeded packages installed as dependencies
-  dnf:
+  ansible.builtin.dnf:
     autoremove: true

@@ -1,19 +1,19 @@
 ---
 - name: Install packages to allow apt to use a repository over HTTPS
-  package:
+  ansible.builtin.package:
     name: ca-certificates, curl, gnupg
     state: present
 
 # so far, all builds are for 'bionic' only, but it works in other newer distributions as well
 
 - name: 'Add Chromium Team GPG key for bionic'
-  apt_key:
+  ansible.builtin.apt_key:
     url: 'http://keyserver.ubuntu.com/pks/lookup?op=get&search=0xEA6E302DC78CC4B087CFC3570EBEA9B02842F111'
     keyring: /usr/share/keyrings/chromium-team-beta-keyring.gpg
     state: present
 
 - name: 'Set up the Chromium Team repository for bionic'
-  apt_repository:
+  ansible.builtin.apt_repository:
     repo: 'deb [signed-by=/usr/share/keyrings/chromium-team-beta-keyring.gpg] https://ppa.launchpadcontent.net/chromium-team/beta/ubuntu bionic main'
     state: present
     filename: chromium-beta
