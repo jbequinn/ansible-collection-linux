@@ -16,5 +16,13 @@
   ansible.builtin.apt_repository:
     repo: 'deb [signed-by=/usr/share/keyrings/chromium-team-beta-keyring.gpg] https://ppa.launchpadcontent.net/chromium-team/beta/ubuntu bionic main'
     state: present
-    filename: chromium-beta
+    filename: chromium-beta.list
     update_cache: true
+
+- name: 'Copy the apt preferences file'
+  ansible.builtin.copy:
+    src: pin-chromium-team-beta.pref
+    dest: '/etc/apt/preferences.d/pin-chromium-team-beta.pref'
+    owner: 'root'
+    group: 'root'
+    mode: '0644'
