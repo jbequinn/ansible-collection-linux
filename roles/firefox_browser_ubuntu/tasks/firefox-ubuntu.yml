@@ -14,7 +14,7 @@
   ansible.builtin.apt_repository:
     repo: 'deb [signed-by=/usr/share/keyrings/mozilla-team-keyring.gpg] https://ppa.launchpadcontent.net/mozillateam/ppa/ubuntu {{ distribution }} main'
     state: present
-    filename: firefox.list
+    filename: firefox
     update_cache: true
 
 - name: 'Copy the apt preferences file'
