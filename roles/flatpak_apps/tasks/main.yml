@@ -8,7 +8,7 @@
   community.general.flatpak_remote:
     name: flathub
     flatpakrepo_url: https://flathub.org/repo/flathub.flatpakrepo
-    method: system
+    method: user
     state: present
 
 - name: Install Flatpak applications
