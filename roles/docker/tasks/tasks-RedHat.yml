@@ -8,3 +8,6 @@
   ansible.builtin.get_url:
     url: 'https://download.docker.com/linux/{{ docker_os }}/docker-ce.repo'
     dest: /etc/yum.repos.d/docker-ce.repo
+    owner: 'root'
+    group: 'root'
+    mode: '0644'
