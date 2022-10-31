@@ -17,5 +17,5 @@
       - vdpauinfo
     state: present
 
-- name: update Kernel Mode Setting
+- name: Update Kernel Mode Setting
   ansible.builtin.command: grubby --update-kernel=ALL --args='nvidia-drm.modeset=1'

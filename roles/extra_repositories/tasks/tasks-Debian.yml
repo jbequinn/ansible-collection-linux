@@ -1,6 +1,6 @@
 ---
-- name: add universe repository
+- name: Add universe repository
   ansible.builtin.command: add-apt-repository --yes universe
 
-- name: add multiverse repository
+- name: Add multiverse repository
   ansible.builtin.command: add-apt-repository --yes multiverse
