@@ -7,4 +7,4 @@
 
 - name: Reboot the server (if required)
   ansible.builtin.reboot:
-  when: reboot_required_file.stat.exists == true
+  when: reboot_required_file.stat.exists
