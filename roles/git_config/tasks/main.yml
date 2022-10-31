@@ -1,7 +1,7 @@
 - name: copy gitconfig file
   ansible.builtin.get_url:
     url: https://raw.githubusercontent.com/jbequinn/dotfiles-git/main/.gitconfig
-    dest: '/home/{{ ansible_user }}/.gitconfig'
+    dest: '{{ user_home_dir }}/.gitconfig'
     owner: '{{ ansible_user }}'
     group: '{{ ansible_group | default(ansible_user) }}'
     mode: '0644'
