@@ -4,19 +4,8 @@
     name: flatpak
     state: present
 
-- name: Add the Flathub Flatpak repository remote to the system installation
-  community.general.flatpak_remote:
-    name: flathub
-    flatpakrepo_url: https://flathub.org/repo/flathub.flatpakrepo
-    method: user
-    state: present
-
-# remove filters. e.g. fedora-flathub-filter
-- name: Remove flathub filters (if any)
-  ansible.builtin.command: flatpak remote-modify --system --no-filter flathub
-
-- name: Update after removing filters
-  ansible.builtin.command: flatpak update --appstream flathub
+- name: Import platform-specific tasks
+  include_tasks: "tasks-{{ ansible_os_family }}.yml"
 
 - name: Install Flatpak applications
   community.general.flatpak:
@@ -24,4 +13,4 @@
     state: present
     method: system
     remote: flathub
-  loop: '{{ flatpak_apps }}'
+  loop: '{{ flatpak_apps if flatpak_apps is iterable else [] }}'

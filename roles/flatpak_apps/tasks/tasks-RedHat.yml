@@ -1,0 +1,7 @@
+---
+# remove filters. e.g. fedora-flathub-filter
+- name: Remove flathub filters (if any)
+  ansible.builtin.command: flatpak remote-modify --system --no-filter flathub
+
+- name: Update after removing filters
+  ansible.builtin.command: flatpak update --appstream flathub
