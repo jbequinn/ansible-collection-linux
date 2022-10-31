@@ -1,2 +1,2 @@
 ---
-user_home_dir: "{{ lookup('ansible.builtin.env', 'HOME', default='/home/{{ ansible_user }}' }}"
+user_home_dir: "{{ lookup('ansible.builtin.env', 'HOME', default='/home/{{ ansible_user }}') }}"
