@@ -5,14 +5,14 @@
     state: present
 
 - name: 'Add KeePassXC GPG key'
-  ansible.builtin.apt_key:
+  ansible.builtin.get_url:
     url: 'http://keyserver.ubuntu.com/pks/lookup?op=get&search=0xD89C66D0E31FEA2874EBD20561922AB60068FCD6'
-    keyring: /usr/share/keyrings/keepassxc-keyring.gpg
-    state: present
+    dest: /etc/apt/trusted.gpg.d/keepassxc-keyring.asc
+    mode: '0644'
 
 - name: 'Set up the KeePassXC repository'
   ansible.builtin.apt_repository:
-    repo: 'deb [signed-by=/usr/share/keyrings/keepassxc-keyring.gpg] https://ppa.launchpadcontent.net/phoerious/keepassxc/ubuntu {{ ansible_distribution_release }} main'
+    repo: 'deb [signed-by=/etc/apt/trusted.gpg.d/keepassxc-keyring.asc] https://ppa.launchpadcontent.net/phoerious/keepassxc/ubuntu {{ ansible_distribution_release }} main'
     state: present
     filename: keepassxc
     update_cache: true

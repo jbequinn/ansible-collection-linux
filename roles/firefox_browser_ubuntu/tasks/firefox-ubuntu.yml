@@ -5,14 +5,14 @@
     state: present
 
 - name: 'Add Mozilla Team GPG key for {{ distribution }}'
-  ansible.builtin.apt_key:
+  ansible.builtin.get_url:
     url: 'http://keyserver.ubuntu.com/pks/lookup?op=get&search=0x0AB215679C571D1C8325275B9BDB3D89CE49EC21'
-    keyring: /usr/share/keyrings/mozilla-team-keyring.gpg
-    state: present
+    dest: /etc/apt/trusted.gpg.d/mozilla-team-keyring.asc
+    mode: '0644'
 
 - name: 'Set up the Mozilla Team repository for {{ distribution }}'
   ansible.builtin.apt_repository:
-    repo: 'deb [signed-by=/usr/share/keyrings/mozilla-team-keyring.gpg] https://ppa.launchpadcontent.net/mozillateam/ppa/ubuntu {{ distribution }} main'
+    repo: 'deb [signed-by=/etc/apt/trusted.gpg.d/mozilla-team-keyring.asc] https://ppa.launchpadcontent.net/mozillateam/ppa/ubuntu {{ distribution }} main'
     state: present
     filename: firefox
     update_cache: true

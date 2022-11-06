@@ -7,14 +7,14 @@
 # so far, all builds are for 'bionic' only, but it works in other newer distributions as well
 
 - name: 'Add Chromium Team GPG key for bionic'
-  ansible.builtin.apt_key:
+  ansible.builtin.get_url:
     url: 'http://keyserver.ubuntu.com/pks/lookup?op=get&search=0xEA6E302DC78CC4B087CFC3570EBEA9B02842F111'
-    keyring: /usr/share/keyrings/chromium-team-beta-keyring.gpg
-    state: present
+    dest: /etc/apt/trusted.gpg.d/chromium-team-beta-keyring.asc
+    mode: '0644'
 
 - name: 'Set up the Chromium Team repository for bionic'
   ansible.builtin.apt_repository:
-    repo: 'deb [signed-by=/usr/share/keyrings/chromium-team-beta-keyring.gpg] https://ppa.launchpadcontent.net/chromium-team/beta/ubuntu bionic main'
+    repo: 'deb [signed-by=/etc/apt/trusted.gpg.d/chromium-team-beta-keyring.asc] https://ppa.launchpadcontent.net/chromium-team/beta/ubuntu bionic main'
     state: present
     filename: chromium-beta
     update_cache: true
