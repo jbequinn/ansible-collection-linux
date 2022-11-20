@@ -1,12 +1,12 @@
 ---
 - name: Install packages
   ansible.builtin.package:
-    name: "{{ install_packages }}"
+    name: "{{ install_packages if install_packages is iterable else [] }}"
     state: present
 
 - name: Uninstall packages
   ansible.builtin.package:
-    name: "{{ uninstall_packages }}"
+    name: "{{ uninstall_packages if uninstall_packages is iterable else [] }}"
     state: absent
 
 - include_tasks: "tasks-{{ ansible_os_family }}.yml"

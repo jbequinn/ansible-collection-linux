@@ -9,8 +9,7 @@
 
 - name: Install Flatpak applications
   community.general.flatpak:
-    name: '{{ item }}'
+    name: '{{ flatpak_apps if flatpak_apps is iterable else [] }}'
     state: present
     method: system
     remote: flathub
-  loop: '{{ flatpak_apps if flatpak_apps is iterable else [] }}'
