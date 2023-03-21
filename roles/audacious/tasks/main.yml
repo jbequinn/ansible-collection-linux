@@ -1,0 +1,9 @@
+---
+- name: Import platform specific audacious tasks
+  include_tasks: "audacious-ubuntu.yml"
+  when: ansible_distribution == 'Pop!_OS' or ansible_distribution == 'Ubuntu'
+
+- name: Install audacious app
+  ansible.builtin.package:
+    name: audacious, audacious-plugins*
+    state: present

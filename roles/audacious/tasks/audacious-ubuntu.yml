@@ -1,0 +1,26 @@
+---
+- name: Install packages to allow apt to use a repository over HTTPS
+  ansible.builtin.package:
+    name: ca-certificates, curl, gnupg
+    state: present
+
+- name: 'Add ubuntuhandbook PPA GPG key'
+  ansible.builtin.get_url:
+    url: 'http://keyserver.ubuntu.com/pks/lookup?op=get&search=0xA0062203196CA4482DDB859E4C1CBE14852541CB'
+    dest: /etc/apt/trusted.gpg.d/ubuntuhandbook1-keyring.asc
+    mode: '0644'
+
+- name: 'Set up the ubuntuhandbook repository'
+  ansible.builtin.apt_repository:
+    repo: 'deb [signed-by=/etc/apt/trusted.gpg.d/ubuntuhandbook1-keyring.asc] https://ppa.launchpadcontent.net/ubuntuhandbook1/apps/ubuntu  {{ ansible_distribution_release }} main'
+    state: present
+    filename: ubuntuhandbook1
+    update_cache: true
+
+- name: 'Copy the apt preferences file'
+  ansible.builtin.copy:
+    src: pin-audacious.pref
+    dest: '/etc/apt/preferences.d/pin-audacious.pref'
+    owner: 'root'
+    group: 'root'
+    mode: '0644'
