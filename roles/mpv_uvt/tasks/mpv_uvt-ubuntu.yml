@@ -1,0 +1,26 @@
+---
+- name: Install packages to allow apt to use a repository over HTTPS
+  ansible.builtin.package:
+    name: ca-certificates, curl, gnupg
+    state: present
+
+- name: 'Add mpv uvt.nl GPG key'
+  ansible.builtin.get_url:
+    url: 'https://non-gnu.uvt.nl/debian/uvt_key-with-signatures.asc'
+    dest: /etc/apt/trusted.gpg.d/mpv_uvt-keyring.asc
+    mode: '0644'
+
+- name: 'Set up the mpv uvt.nl repository'
+  ansible.builtin.apt_repository:
+    repo: 'deb [signed-by=/etc/apt/trusted.gpg.d/mpv_uvt-keyring.asc] http://non-gnu.uvt.nl/debian {{ ansible_distribution_release }} uvt'
+    state: present
+    filename: mpv_uvt
+    update_cache: true
+
+- name: 'Copy the apt preferences file'
+  ansible.builtin.copy:
+    src: pin-mpv_uvt.pref
+    dest: '/etc/apt/preferences.d/pin-mpv_uvt.pref'
+    owner: 'root'
+    group: 'root'
+    mode: '0644'
