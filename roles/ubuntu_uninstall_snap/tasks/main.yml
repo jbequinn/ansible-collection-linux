@@ -23,8 +23,3 @@
     owner: 'root'
     group: 'root'
     mode: '0644'
-
-- name: Install Gnome-software
-  ansible.builtin.package:
-    name: "gnome-software"
-    state: present
