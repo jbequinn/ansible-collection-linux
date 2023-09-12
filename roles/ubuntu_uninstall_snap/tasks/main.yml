@@ -16,6 +16,16 @@
     state: absent
   when: snap_installed.stat.exists
 
+- name: Stop and disable snapd services
+  ansible.builtin.systemd:
+    name: "{{ item }}"
+    state: stopped
+    enabled: false
+  loop:
+    - snapd.service
+    - snapd.socket
+  when: snap_installed.stat.exists
+
 - name: Unmount the snap mount points
   mount:
     path: /var/snap
