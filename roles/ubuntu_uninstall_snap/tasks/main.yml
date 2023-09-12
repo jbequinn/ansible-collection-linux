@@ -4,6 +4,11 @@
     path: /usr/bin/snap
   register: snap_installed
 
+- name: Unmount Firefox hunspell
+  ansible.posix.mount:
+    path: /var/snap/firefox/common/host-hunspell
+    state: unmounted
+  when: snap_installed.stat.exists
 - name: Unmount the snap mount points
   mount:
     path: /var/snap
