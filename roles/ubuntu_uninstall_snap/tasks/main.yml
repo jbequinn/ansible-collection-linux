@@ -9,6 +9,13 @@
     path: /var/snap/firefox/common/host-hunspell
     state: unmounted
   when: snap_installed.stat.exists
+
+- name: Remove snaps
+  community.general.snap:
+    name: '{{ snap_uninstall_apps if snap_uninstall_apps is iterable else [] }}'
+    state: absent
+  when: snap_installed.stat.exists
+
 - name: Unmount the snap mount points
   mount:
     path: /var/snap
