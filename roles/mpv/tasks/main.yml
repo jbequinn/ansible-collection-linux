@@ -1,0 +1,9 @@
+---
+- name: Import platform specific mpv tasks
+  include_tasks: "mpv-ubuntu.yml"
+  when: ansible_distribution == 'Pop!_OS' or ansible_distribution == 'Ubuntu'
+
+- name: Install mpv app
+  ansible.builtin.package:
+    name: mpv
+    state: present

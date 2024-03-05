@@ -1,0 +1,7 @@
+Package: *
+Pin: release o=ubuntuhandbook1
+Pin-Priority: 200
+
+Package: mpv
+Pin: release o=ubuntuhandbook1
+Pin-Priority: 991
