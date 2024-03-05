@@ -1,7 +1,0 @@
-Package: *
-Pin: release o=UvT
-Pin-Priority: 200
-
-Package: mpv
-Pin: release o=UvT
-Pin-Priority: 991
