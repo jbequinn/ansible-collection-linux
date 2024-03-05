@@ -14,7 +14,7 @@
   ansible.builtin.apt_repository:
     repo: 'deb [signed-by=/etc/apt/trusted.gpg.d/ubuntuhandbook1-keyring.asc] https://ppa.launchpadcontent.net/ubuntuhandbook1/apps/ubuntu  {{ ansible_distribution_release }} main'
     state: present
-    filename: ubuntuhandbook1
+    filename: ubuntuhandbook1-apps
     update_cache: true
 
 - name: 'Copy the apt preferences file'
