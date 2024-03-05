@@ -1,9 +1,0 @@
----
-- name: Import platform specific Firefox tasks
-  include_tasks: "mozilla-ubuntu.yml"
-  when: ansible_distribution == 'Pop!_OS' or ansible_distribution == 'Ubuntu'
-
-- name: Install Firefox
-  ansible.builtin.package:
-    name: firefox
-    state: present
