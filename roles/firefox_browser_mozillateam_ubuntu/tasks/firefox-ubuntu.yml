@@ -19,7 +19,7 @@
 
 - name: 'Copy the apt preferences file'
   ansible.builtin.copy:
-    src: pin-firefox-team.pref
+    src: pin-mozilla-team.pref
     dest: '/etc/apt/preferences.d/pin-firefox-team.pref'
     owner: 'root'
     group: 'root'
