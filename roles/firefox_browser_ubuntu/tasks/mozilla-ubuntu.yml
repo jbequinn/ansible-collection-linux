@@ -1,0 +1,26 @@
+---
+- name: Install packages to allow apt to use a repository over HTTPS
+  ansible.builtin.package:
+    name: ca-certificates, curl, gnupg
+    state: present
+
+- name: 'Add Mozilla GPG key'
+  ansible.builtin.get_url:
+    url: 'https://packages.mozilla.org/apt/repo-signing-key.gpg'
+    dest: /etc/apt/trusted.gpg.d/packages.mozilla.org.asc
+    mode: '0644'
+
+- name: 'Set up the Mozilla repository'
+  ansible.builtin.apt_repository:
+    repo: 'deb [signed-by=/etc/apt/trusted.gpg.d/packages.mozilla.org.asc] https://packages.mozilla.org/apt mozilla main'
+    state: present
+    filename: mozilla
+    update_cache: true
+
+- name: 'Copy the apt preferences file'
+  ansible.builtin.copy:
+    src: pin-mozilla.pref
+    dest: '/etc/apt/preferences.d/pin-mozilla.pref'
+    owner: 'root'
+    group: 'root'
+    mode: '0644'
