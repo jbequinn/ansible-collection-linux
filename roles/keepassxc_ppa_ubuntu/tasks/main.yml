@@ -2,8 +2,3 @@
 - name: Import platform specific KeePassXC tasks
   include_tasks: "keepassxc-ubuntu.yml"
   when: ansible_distribution == 'Pop!_OS' or ansible_distribution == 'Ubuntu'
-
-- name: Install KeePassXC app
-  ansible.builtin.package:
-    name: keepassxc
-    state: present
