@@ -6,8 +6,5 @@
     owner: 'root'
     group: 'root'
     mode: '0600'
-
-- name: Restart service docker
-  ansible.builtin.service:
-    name: docker
-    state: restarted
+  notify:
+    - restart docker
