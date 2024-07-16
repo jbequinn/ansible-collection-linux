@@ -1,17 +1,27 @@
 ---
-name: Build and publish collection
+name: Publish Collection on Galaxy
+
 on:
   release:
     types:
       - published
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: false
 
 jobs:
-  deploy:
+  build-and-publish:
+    name: Build and publish the Collection on Galaxy
     runs-on: ubuntu-latest
+    environment: main
+    timeout-minutes: 5
     steps:
-      - uses: actions/checkout@v2
+      - name: Check out code
+        uses: actions/checkout@v4
 
-      - name: Build and Deploy Collection
+      - name: Build and publish
         uses: artis3n/ansible_galaxy_collection@v2
         with:
           api_key: '${{ secrets.GALAXY_API_KEY }}'
